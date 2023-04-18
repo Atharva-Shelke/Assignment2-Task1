@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+</head>
+<body>
+    <center> 
+    <div class="box">
+        <h1>Weather in {%location%},{%country%}</h1>
+
+        <div class="Info">
+            <h2>Temperature : {%tempval%} &deg;c</h2>
+            <h3>Maximum : {%tempmax%} &deg;c | Minimum : {%tempmin%} &deg;c</h3> 
+            <h2>Sky Conditions : {%main%}-{%description%} </h2>
+            <h3 id="date"></h3>
+
+        </div>
+
+    </div>
+</center>
+
+    <script>
+     const curDate=document.getElementById("date");
+     let weathercondition=document.getElementById("weathercondition");
+     const tempStatus="{%tempstatus%}";
+
+     const getCurrentDay=() => {
+      var weekday=new Array(7);
+      weekday[0]="Sunday";
+      weekday[1]="Monday"; 
+      weekday[2]="Tuesday";
+      weekday[3]="Wednesday";
+      weekday[4]="Thursday";
+      weekday[5]="Friday";
+      weekday[6]="Saturday";
+
+     let currentTime=new Date();
+     console.log(weekday[currentTime.getDay()]);
+     let day = weekday[currentTime.getDay()];
+     return day; 
+     };
+      
+  
+     const getCurrentTime=()=>{
+        var months=[
+            "Jan","Feb","March","April","May","Jun","July","August","Sept","Oct","Nov","Dec"
+        ];
+        var now=new Date();
+        var month=months[now.getMonth()]; 
+
+        <!-- var month=now.getMonth()+1; -->
+        var date=now.getDate();
+
+        console.log(month+"/"+date);
+
+        let hours=now.getHours();
+        let mins=now.getMinutes();
+
+        let period="AM";
+
+        if(hours>11)
+        {
+        period="PM";
+        if(hours>12)
+        hours -= 12;
+        }
+
+        if(mins<10)
+        {
+         mins="0"+mins;
+        }
+
+        return `${month}${date}  | ${hours}:${mins}${period}`;
+
+        console.log(month+"/"+day);
+     };
+       curDate.innerHTML= getCurrentDay()+" | "+getCurrentTime();
+ 
+    </script>
+</body>
+</html> 
